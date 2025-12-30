@@ -114,7 +114,11 @@ void playRockPaperScissors() {
         }
     }
 }
-
+void playTicTacToe() {
+    vector<char> board(9, ' ');
+    char currentPlayer = 'X';
+    int moves = 0;
+}
 int main(){
    srand(time(nullptr)); 
 
@@ -125,7 +129,7 @@ cout << "         Welcome to the game collection!          " << endl;
 cout << "#====================================================#" << endl << endl;
 
 
-    cout << "1. Head or Tails \t 2. Rock Paper Scissors \t 3. Coming Soon" << endl;
+    cout << "1. Head or Tails \t 2. Rock Paper Scissors \t 3. Tic Tac Toe" << endl;
     
     cout << "4. Coming Soon   \t 5. Coming Soon         \t 6. End Game" << endl << endl;
     cout << "#====================================================#" << endl << endl;
@@ -134,15 +138,16 @@ cout << "#====================================================#" << endl << endl
     cin >> choice;
     switch(choice){
         case 1:
-            cout << "You selected Head or Tails!" << endl << endl;
+            cout << "You selected Head or Tails!"  << endl << endl<<  endl;
             playHeadOrTails();
             break;
         case 2:
-            cout << "You selected Rock Paper Scissors!" << endl;
+            cout << "You selected Rock Paper Scissors!" << endl << endl << endl;
             playRockPaperScissors();
             break;
         case 3:
-            cout << "This game is coming soon!" << endl;
+            cout << "You selected Tic Tac Toe!" << endl << endl<< endl;
+            playTicTacToe();
             break;
         case 4:
             cout << "This game is coming soon!" << endl;

@@ -6,6 +6,47 @@
 
 using namespace std;
 
+bool checkWin_game3(const vector<char>& board, char player) {
+    if (board[0] == player && board[1] == player && board[2] == player) return true;
+    else if (board[3] == player && board[4] == player && board[5] == player) return true;
+    else if (board[6] == player && board[7] == player && board[8] == player) return true;
+    else if (board[0] == player && board[3] == player && board[6] == player) return true;
+    else if (board[1] == player && board[4] == player && board[7] == player) return true;
+    else if (board[2] == player && board[5] == player && board[8] == player) return true;
+    else if (board[0] == player && board[4] == player && board[8] == player) return true;
+    else if (board[2] == player && board[4] == player && board[6] == player) return true;
+    else return false;
+}
+
+bool checkDraw_game3(const vector<char>& board) {
+    if (board[0] != ' ' && board[1] != ' ' && board[2] != ' ' &&
+        board[3] != ' ' && board[4] != ' ' && board[5] != ' ' &&
+        board[6] != ' ' && board[7] != ' ' && board[8] != ' ')
+        
+        {
+        return true; }
+    else{
+    return false; }
+}
+void printBoard_game3(const vector<char>& board) {
+    cout << "\033[34m"; 
+
+    cout << "     |     |     \n";
+    cout << "  " << board[0] << "  |  " << board[1] << "  |  " << board[2] << "\n";
+    cout << "_____|_____|_____\n";
+    cout << "     |     |     \n";
+    cout << "  " << board[3] << "  |  " << board[4] << "  |  " << board[5] << "\n";
+    cout << "_____|_____|_____\n";
+    cout << "     |     |     \n";
+    cout << "  " << board[6] << "  |  " << board[7] << "  |  " << board[8] << "\n";
+    cout << "     |     |     \n";
+
+    cout << "\033[0m";
+
+    
+
+}
+
 void playHeadOrTails() {
     bool playAgain = true;
     char choice;
@@ -114,13 +155,79 @@ void playRockPaperScissors() {
         }
     }
 }
+
 void playTicTacToe() {
-    vector<char> board(9, ' ');
-    char currentPlayer = 'X';
-    int moves = 0;
-}
+    vector<char> board(9, ' '); 
+    int userPos;
+    int computerPos;
+
+
+    bool playing = true;
+    while (playing) {
+ 
+        printBoard_game3(board);
+      
+
+        cout << "Choose a position (1-9) to place your mark: ";
+    
+        cin >> userPos;
+        userPos--;
+        if (userPos < 0 || userPos >= 9 || board[userPos] != ' ') {
+            cout << "Invalid move. Try again." << endl;
+            playing = true; 
+            continue;
+    }else {
+
+            board[userPos] = 'X'; 
+
+    }
+
+    bool userWin = checkWin_game3(board, 'X');
+  
+        if (userWin) {
+            printBoard_game3(board);
+            cout << "Congratulations! You win!" << endl;
+            playing = false;
+            continue;
+        }
+        
+        computerPos = randInt(0, 8);
+        while (board[computerPos] != ' ') {
+            computerPos = randInt(0, 8);
+        }
+        board[computerPos] = 'O';}
+
+    bool computerWin = checkWin_game3(board, 'O');
+  
+        if (computerWin) {
+            printBoard_game3(board);
+            cout << "A dumb bot wins! You lose!" << endl;
+            playing = false;
+        }    
+
+
+    if (playing) {
+   bool draw = checkDraw_game3(board);
+   
+        if (draw) {
+            printBoard_game3(board);
+            cout << "It's a draw!" << endl;
+            playing = false;
+        }
+    }else {
+        //just nothing here womp womp
+    }
+    }
 int main(){
+cout << "\033[33m" 
+              << "  ______                    _             __   ______           ______ \n"
+              << " /_  __/__  _________ ___  (_)___  ____ _/ /  / ____/________ _/ __/ /_\n"
+              << "  / / / _ \\/ ___/ __ `__ \\/ / __ \\/ __ `/ /  / /   / ___/ __ `/ /_/ __/\n"
+              << " / / /  __/ /  / / / / / / / / / / /_/ / /  / /___/ /  / /_/ / __/ /_  \n"
+              << "/_/  \\___/_/  /_/ /_/ /_/_/_/ /_/\\__,_/_/   \\____/_/   \\__,_/_/  \\__/  \n"
+              << "\033[0m" << endl; 
    srand(time(nullptr)); 
+   
 
     bool endProgram = false;
     while (!endProgram) {

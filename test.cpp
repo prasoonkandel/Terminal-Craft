@@ -1,5 +1,4 @@
-// The files containg my all testting sessions
-
+// The files containg my testing sessions s
 #include <iostream>
 #include <vector>
 #include <string>
@@ -68,10 +67,17 @@ void sessionOne() {
     }
 
 
+void sessionTwo(){
+
+
+}
+
 int main() {
     cout << "Which Testing session do you want to run?" << endl;
     cout << "1. Session One" << endl;  
+    cout << "2. Session Two" << endl;
     cout << "Enter your choice: ";
+
 
     int choice;
     cin >> choice;
@@ -84,6 +90,13 @@ int main() {
             sessionOne();
         
             break;
+
+        case 2:
+            cout << "Running Testing Session Two..." << endl << endl << endl;
+
+            sessionTwo();
+            break;
+
         default:
             cout << "Invalid choice. Exiting." << endl;
             break;

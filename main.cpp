@@ -181,7 +181,7 @@ void playTicTacToe() {
             board[userPos] = 'X'; 
 
     }
-
+    
     bool userWin = checkWin_game3(board, 'X');
   
         if (userWin) {
@@ -236,9 +236,9 @@ cout << "         Welcome to the game collection!          " << endl;
 cout << "#====================================================#" << endl << endl;
 
 
-    cout << "1. Head or Tails \t 2. Rock Paper Scissors \t 3. Tic Tac Toe" << endl;
-    
+    cout << "1. Head or Tails \t 2. Rock Paper Scissors \t 3. Tic Tac Toe" << endl; 
     cout << "4. Coming Soon   \t 5. Coming Soon         \t 6. End Game" << endl << endl;
+
     cout << "#====================================================#" << endl << endl;
     cout << "Select a game to play:";
     int choice;

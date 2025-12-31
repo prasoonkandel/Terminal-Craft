@@ -6,6 +6,19 @@
 
 using namespace std;
 
+void hangmanDisplay(int attemptsLeft) {
+   cout << "\33[32m";
+   cout << "  _______\n";
+   cout << " |/      |\n";
+   cout << " |      " << (attemptsLeft <= 5 ? "(_)" : "") << "\n";
+   cout << " |      " << (attemptsLeft <= 4 ? "|" : "") << (attemptsLeft <= 3 ? "\\" : "") << (attemptsLeft <= 2 ? "/" : "") << "\n";
+   cout << " |      " << (attemptsLeft <= 1 ? "/" : "") << (attemptsLeft == 0 ? " \\" : "") << "\n";
+   cout << " |\n";                             
+   cout << "_|___\n";
+    cout << "\33[0m";
+}
+
+
 bool checkWin_game3(const vector<char>& board, char player) {
     if (board[0] == player && board[1] == player && board[2] == player) return true;
     else if (board[3] == player && board[4] == player && board[5] == player) return true;
@@ -218,6 +231,105 @@ void playTicTacToe() {
         //just nothing here womp womp
     }
     }
+
+
+void playHangman() {
+   const vector<string> words = {
+    "computer",
+    "science",
+    "planet",
+    "history",
+    "library",
+    "mountain",
+    "network",
+    "teacher",
+    "student",
+    "language"
+};
+
+  bool playing = true;
+  string randomWord;
+  int randomInt;
+  
+
+  while (playing){
+
+    randomInt = randInt(0,9);
+    randomWord = words[randomInt];
+    
+    string guessedWord(randomWord.length(), '_');
+    int attempts = 6;
+    int maxAttempts = 6;
+    vector<char> guessedLetters;
+    bool wordGuessed = false;
+
+    cout << "Try to guess the word!" << endl;
+    while (attempts > 0 && !wordGuessed)
+    {
+        cout << "Word: " << guessedWord << endl;
+        hangmanDisplay(attempts);
+        cout << "Guessed letters: ";
+        for (char letter : guessedLetters) {
+            cout << letter << " ";
+        }
+        cout << endl;   
+        cout << "Attempts left: " << attempts << "/" << maxAttempts << endl;
+        cout << "Enter a letter: ";
+        char guess;
+        cin >> guess;
+
+        guess = tolower(guess);
+        if (find(guessedLetters.begin(), guessedLetters.end(), guess) != guessedLetters.end()) {
+            cout << "You already guessed that letter. Try again." << endl;
+            continue;
+        }else {
+            guessedLetters.push_back(guess);
+        }
+        bool correctGuess = false;
+        for (size_t i = 0; i < randomWord.length(); ++i) {
+            if (randomWord[i] == guess) {
+                guessedWord[i] = guess;
+                correctGuess = true;
+            }
+        }
+        if (!correctGuess) {
+            attempts--;
+        }
+        wordGuessed = (guessedWord == randomWord);
+    }
+
+    if (wordGuessed) {
+        
+        cout << "Word: " << guessedWord << endl;
+        hangmanDisplay(attempts);
+        cout << "Guessed letters: ";
+        for (char letter : guessedLetters) {
+            cout << letter << " ";
+        }
+        cout << endl;   
+        cout << "Attempts left: " << attempts << "/" << maxAttempts << endl;
+        cout << "Congratulations! You guessed the word: " << randomWord << endl;
+    } else {
+        
+        cout << "Word: " << guessedWord << endl;
+        hangmanDisplay(attempts);
+        cout << "Guessed letters: ";
+        for (char letter : guessedLetters) {
+            cout << letter << " ";
+        }
+        cout << endl;   
+        cout << "Attempts left: " << attempts << "/" << maxAttempts << endl;
+        cout << "Game Over! The word was: " << randomWord << endl;
+    }
+
+    cout << "Do you want to play again? (Y/N): ";
+    char again;
+    cin >> again;
+    if (toupper(again) != 'Y') {
+        playing = false;
+    }
+}
+}
 int main(){
 cout << "\033[33m" 
               << "  ______                    _             __   ______           ______ \n"
@@ -237,7 +349,7 @@ cout << "#====================================================#" << endl << endl
 
 
     cout << "1. Head or Tails \t 2. Rock Paper Scissors \t 3. Tic Tac Toe" << endl; 
-    cout << "4. Coming Soon   \t 5. Coming Soon         \t 6. End Game" << endl << endl;
+    cout << "4. Hangman       \t 5. Coming Soon         \t 6. End Game" << endl << endl;
 
     cout << "#====================================================#" << endl << endl;
     cout << "Select a game to play:";
@@ -257,7 +369,8 @@ cout << "#====================================================#" << endl << endl
             playTicTacToe();
             break;
         case 4:
-            cout << "This game is coming soon!" << endl;
+            cout << "You selected Hangman!" << endl << endl << endl;
+            playHangman();
             break;
             
         case 5:

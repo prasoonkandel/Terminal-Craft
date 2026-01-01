@@ -69,6 +69,8 @@ void playHeadOrTails() {
         cout << "Do you want to choose Head or Tails? (H/T): ";
  
         cin >> choice;
+        cin.clear();
+        cin.ignore(10000, '\n');
         choice = toupper(choice);
 
         if (choice != 'H' && choice != 'T') {
@@ -86,15 +88,23 @@ void playHeadOrTails() {
         computerChoice = randInt(1, 2);
         if (userChoice == computerChoice) {
             if (userChoice == 1) {
+                cout << "\033[32m";
                 cout << "It's Head! You win!" << endl;
+                cout << "\033[0m";
             } else {
+                cout << "\033[32m";
                 cout << "It's Tails! You win!" << endl;
+                cout << "\033[0m";
             }
         } else {
             if (computerChoice == 1) {
+                cout << "\033[31m";
                 cout << "It's Head! You lose!" << endl;
+                cout << "\033[0m";
             } else {
+                cout << "\033[31m";
                 cout << "It's Tails! You lose!" << endl;
+                cout << "\033[0m";
             }
         }
         cout << "Do you want to play again? (Y/N): ";
@@ -136,28 +146,41 @@ void playRockPaperScissors() {
         if (userChoice == computerChoice){
             cout << "It's a tie!" << endl;
         } else if (userChoice == 1 && computerChoice==3)
-        {
+        {   
+            cout << "\033[32m";
             cout << "Rock crushes Scissors! You win!" << endl;
+            cout << "\033[0m";
 
         }else if (userChoice == 2 && computerChoice==1)
         {
+            cout << "\033[32m";
             cout << "Paper covers Rock! You win!" << endl;
+            cout << "\033[0m";
 
         }else if (userChoice == 3 && computerChoice==2)
         {
+
+            cout << "\033[32m";
        
             cout << "Scissors cuts Paper! You win!" << endl;
+            cout << "\033[0m";
                } else if (computerChoice == 1 && userChoice==3)
         {
+            cout << "\033[31m";
             cout << "Rock crushes Scissors! You lose!" << endl;
+            cout << "\033[0m";
 
         }else if (computerChoice == 2 && userChoice==1)
         {
+            cout << "\033[31m";
             cout << "Rock gets covered by Paper! You lose!" << endl;
+            cout << "\033[0m";
 
         }else if (computerChoice == 3 && userChoice==2)
         {
+             cout << "\033[31m";
              cout << "Paper gets cut by Scissors! You lose!" << endl;
+             cout << "\033[0m";
        }
     
         cout << "Do you want to play again? (Y/N): ";
@@ -186,7 +209,9 @@ void playTicTacToe() {
         cin >> userPos;
         userPos--;
         if (userPos < 0 || userPos >= 9 || board[userPos] != ' ') {
+            cout << "\033[31m";
             cout << "Invalid move. Try again." << endl;
+            cout << "\033[0m";
             playing = true; 
             continue;
     }else {
@@ -199,7 +224,9 @@ void playTicTacToe() {
   
         if (userWin) {
             printBoard_game3(board);
+            cout << "\033[32m";
             cout << "Congratulations! You win!" << endl;
+            cout << "\033[0m";
             playing = false;
             continue;
         }
@@ -214,7 +241,9 @@ void playTicTacToe() {
   
         if (computerWin) {
             printBoard_game3(board);
+            cout << "\033[31m";
             cout << "A dumb bot wins! You lose!" << endl;
+            cout << "\033[0m";
             playing = false;
         }    
 
@@ -308,7 +337,9 @@ void playHangman() {
         }
         cout << endl;   
         cout << "Attempts left: " << attempts << "/" << maxAttempts << endl;
+        cout << "\33[32m";
         cout << "Congratulations! You guessed the word: " << randomWord << endl;
+        cout << "\33[0m";
     } else {
         
         cout << "Word: " << guessedWord << endl;
@@ -319,7 +350,9 @@ void playHangman() {
         }
         cout << endl;   
         cout << "Attempts left: " << attempts << "/" << maxAttempts << endl;
+        cout << "\33[31m";
         cout << "Game Over! The word was: " << randomWord << endl;
+        cout << "\33[0m";
     }
 
     cout << "Do you want to play again? (Y/N): ";
@@ -382,7 +415,9 @@ cout << "#====================================================#" << endl << endl
             endProgram = true;
             break;    
         default:
+            cout << "\033[31m";
             cout << "Invalid choice. Please select a valid game." << endl;
+            cout << "\033[0m";
     }}
 return 0;    
 }
